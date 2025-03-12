@@ -54,7 +54,7 @@ $result = $stmt->get_result();
 <body>
 <?php include 'nav.php'; ?>
     <div class="container mt-4">
-        <!-- Search Form -->
+        <!-- Search Form --> <h2><b>Top Employers</b></h2>
         <form method="GET" action="" class="mt-3" style="display:flex;">
             <input type="text" name="search" class="form-control" placeholder="Search by Name..." value="<?= htmlspecialchars($search) ?>">
             <button type="submit" class="btn btn-success " style="margin-left:5px;">Search</button>
