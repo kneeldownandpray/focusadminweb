@@ -46,12 +46,12 @@ $current_page = basename($_SERVER['PHP_SELF']);
     <div class="offcanvas-body">
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link text-white <?= ($current_page == 'dashboard.php') ? 'active text-warning' : '' ?>" href="dashboard.php">
-                    <i class="fas fa-chart-line"></i> Successful Migrants
+                <a class="nav-link  <?= ($current_page == 'dashboard.php') ? 'active text-warning' : 'text-white' ?> " href="dashboard.php">
+                    <i class="fas fa-chart-line"></i> Workers/Migrants
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white <?= ($current_page == 'dashboard2.php') ? 'active text-warning' : '' ?>" href="dashboard2.php">
+                <a class="nav-link  <?= ($current_page == 'dashboard2.php') ? 'active text-warning' : 'text-white' ?> " href="dashboard2.php">
                     <i class="fas fa-folder"></i> Employers
                 </a>
             </li>
