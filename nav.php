@@ -1,8 +1,12 @@
+<?php
+$current_page = basename($_SERVER['PHP_SELF']);
+?>
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
         <!-- Sidebar Toggle Button -->
         <button class="btn btn-light me-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu">
-            ☰
+        ☰</i>
         </button>
 
         <a class="navbar-brand" href="dashboard.php">Focus Website Admin Dashboard</a>
@@ -14,13 +18,19 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="dashboard.php">Home</a>
+                    <a class="nav-link <?= ($current_page == 'dashboard2.php') ? 'active text-warning' : '' ?>" href="dashboard2.php">
+                        <i class="fas fa-briefcase"></i> Employer
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="records.php">Records</a>
+                    <a class="nav-link <?= ($current_page == 'dashboard.php') ? 'active text-warning' : '' ?>" href="dashboard.php">
+                        <i class="fas fa-users"></i> Worker
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link btn btn-danger text-white" href="logout.php">Logout</a>
+                    <a class="nav-link btn btn-danger text-white" href="logout.php">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </a>
                 </li>
             </ul>
         </div>
@@ -36,17 +46,23 @@
     <div class="offcanvas-body">
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link text-white" href="dashboard.php"> 📊 Successful Migrants</a>
+                <a class="nav-link text-white <?= ($current_page == 'dashboard.php') ? 'active text-warning' : '' ?>" href="dashboard.php">
+                    <i class="fas fa-chart-line"></i> Successful Migrants
+                </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" href="dashboard2.php">📁 Top Clients</a>
+                <a class="nav-link text-white <?= ($current_page == 'dashboard2.php') ? 'active text-warning' : '' ?>" href="dashboard2.php">
+                    <i class="fas fa-folder"></i> Employers
+                </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" href="settings.php">⚙️ Settings</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white" href="logout.php">🚪 Logout</a>
+                <a class="nav-link text-white" href="logout.php">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
             </li>
         </ul>
     </div>
 </div>
+
+<!-- Font Awesome CDN -->
+<script src="https://kit.fontawesome.com/your-kit-code.js" crossorigin="anonymous"></script>

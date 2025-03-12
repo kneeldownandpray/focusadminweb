@@ -8,7 +8,7 @@ if (isset($_POST['add'])) {
     $departure_date = date('F j, Y', strtotime($_POST['departure_date'])); // Format: March 14, 2025
     $description = $_POST['description'];
     $date_posted = date('Y-m-d H:i:s');
-    $link = $_POST['link'];
+    $link = !empty($_POST['link']) ? $_POST['link'] : "404";
     // Process Image Upload
     if ($_FILES['company_picture']['error'] == 0) {
         $imageData = file_get_contents($_FILES['company_picture']['tmp_name']);
@@ -61,9 +61,8 @@ if (isset($_POST['edit'])) {
 // DELETE RECORD
 if (isset($_POST['delete'])) {
     $id = $_POST['id'];
-
-    $stmt = $conn->prepare("DELETE FROM recordsofmigrants WHERE id=?");
-    $stmt->bind_param("i", $id);
+    $stmt = $conn->prepare("DELETE FROM recordsofmigrants WHERE id=$id");
+    // $stmt->bind_param("i", $id);
 
     if ($stmt->execute()) {
         $_SESSION['message'] = "Record deleted successfully!";
@@ -71,7 +70,7 @@ if (isset($_POST['delete'])) {
         $_SESSION['error'] = "Failed to delete record.";
     }
     $stmt->close();
-    header("Location: dashboard.php");
+    header("Location: dashboard2.php");
     exit();
 }
 ?>

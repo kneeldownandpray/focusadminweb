@@ -97,7 +97,7 @@ Add New Record
                     <input type="text" name="company_name" class="form-control mb-2" placeholder="Name" required>
                     <input type="date" name="departure_date" class="form-control mb-2" required>
                     <textarea name="description" class="form-control mb-2" placeholder="Description" required></textarea>
-                    <textarea name="link" class="form-control mb-2" placeholder="Link Of Company" required></textarea>
+                    <textarea name="link" class="form-control mb-2" placeholder="Link Of Company(Optional)" ></textarea>
                     <input type="file" name="company_picture" class="form-control mb-2" accept="image/*" required>
                     <button type="submit" name="add" class="btn btn-success">Add Record</button>
                 </form>
@@ -113,7 +113,7 @@ Add New Record
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
-                    <th>Date of Departure</th>
+                    <th>Date of partnership</th>
                     <th>Description</th>
                     <th>Date Posted</th>
                     <th>Company Link</th>
