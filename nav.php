@@ -5,7 +5,7 @@
             ☰
         </button>
 
-        <a class="navbar-brand" href="dashboard.php">Admin Dashboard</a>
+        <a class="navbar-brand" href="dashboard.php">Focus Website Admin Dashboard</a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
@@ -39,7 +39,7 @@
                 <a class="nav-link text-white" href="dashboard.php"> 📊 Successful Migrants</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" href="records.php">📁 Top Clients</a>
+                <a class="nav-link text-white" href="dashboard2.php">📁 Top Clients</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link text-white" href="settings.php">⚙️ Settings</a>
