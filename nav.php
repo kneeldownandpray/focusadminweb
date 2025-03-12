@@ -36,10 +36,10 @@
     <div class="offcanvas-body">
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link text-white" href="dashboard.php">📊 Dashboard</a>
+                <a class="nav-link text-white" href="dashboard.php"> 📊 Successful Migrants</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" href="records.php">📁 Records</a>
+                <a class="nav-link text-white" href="records.php">📁 Top Clients</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link text-white" href="settings.php">⚙️ Settings</a>
