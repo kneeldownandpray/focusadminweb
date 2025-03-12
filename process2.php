@@ -8,7 +8,7 @@ if (isset($_POST['add'])) {
     $departure_date = date('F j, Y', strtotime($_POST['departure_date'])); // Format: March 14, 2025
     $description = $_POST['description'];
     $date_posted = date('Y-m-d H:i:s');
-    $link = $_POST['link'];
+    $link = !empty($_POST['link']) ? $_POST['link'] : "404";
     // Process Image Upload
     if ($_FILES['company_picture']['error'] == 0) {
         $imageData = file_get_contents($_FILES['company_picture']['tmp_name']);
