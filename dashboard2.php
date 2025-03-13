@@ -13,7 +13,7 @@ $search = isset($_GET['search']) ? trim($_GET['search']) : '';
 
 // Pagbilang ng total recordsOfMigrants (kasama ang search)
 if (!empty($search)) {
-    $stmt = $conn->prepare("SELECT COUNT(*) FROM recordsOfMigrants WHERE name LIKE ?");
+    $stmt = $conn->prepare("SELECT COUNT(*) FROM recordsOfMigrants WHERE company_name LIKE ?");
     $search_param = "%{$search}%";
     $stmt->bind_param("s", $search_param);
 } else {
@@ -45,6 +45,8 @@ $result = $stmt->get_result();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+
     <script>
         function confirmDelete() {
             return confirm("Are you sure you want to delete this record?");
@@ -98,6 +100,7 @@ Add New Record
                     <input type="date" name="departure_date" class="form-control mb-2" required>
                     <textarea name="description" class="form-control mb-2" placeholder="Description" required></textarea>
                     <textarea name="link" class="form-control mb-2" placeholder="Link Of Company(Optional)" ></textarea>
+                    <span class="text-red" style="color:red; font-size:13px;"> Required for good design (587 width × 440 height px) </span>
                     <input type="file" name="company_picture" class="form-control mb-2" accept="image/*" required>
                     <button type="submit" name="add" class="btn btn-success">Add Record</button>
                 </form>
@@ -131,11 +134,11 @@ Add New Record
                         <td><?= date('F j, Y', strtotime($row['date_posted'])); ?></td>
                         <td><?= htmlspecialchars($row['link']); ?></td>
                                     <td><img src="data:image/png;base64,<?= htmlspecialchars($row['company_picture']); ?>" width="150"></td>
-                        <td>  
-                            <button class="btn btn-primary" onclick="openEditModal(<?= htmlspecialchars(json_encode($row)); ?>)">Edit</button>
+                        <td >  
+                            <button class="btn btn-primary" onclick="openEditModal(<?= htmlspecialchars(json_encode($row)); ?>)"> <i class="bi bi-pencil-square"></i> Update</button>
                             <form action="process2.php" method="POST" class="d-inline" onsubmit="return confirmDelete()">
                                 <input type="hidden" name="id" value="<?= htmlspecialchars($row['id']); ?>">
-                                <button type="submit" name="delete" class="btn btn-danger">Delete</button>
+                                <button type="submit" name="delete" class="btn btn-danger"><i class="bi bi-trash3" style="margin-right:9px;"></i>Delete</button>
                             </form>
                         </td>
                     </tr>

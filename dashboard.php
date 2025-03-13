@@ -66,46 +66,47 @@ $result = $stmt->get_result();
 
 
 
-<svg xmlns="http://www.w3.org/2000/svg" style="margin-right:10px;" width="20" height="20" fill="currentColor" class="bi bi-person-fill-add" viewBox="0 0 16 16">
-  <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0m-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-  <path d="M2 13c0 1 1 1 1 1h5.256A4.5 4.5 0 0 1 8 12.5a4.5 4.5 0 0 1 1.544-3.393Q8.844 9.002 8 9c-5 0-6 3-6 4"/>
-</svg>
-Add New Record
-</button>
- <!-- Pagination Limit -->
- <div>
-         <label for="limit">Show:</label>
-        <select id="limit" onchange="changeLimit()" class="form-select w-auto d-inline-block mt-3">
-            <option value="10" <?= $limit == 10 ? 'selected' : '' ?>>10</option>
-            <option value="20" <?= $limit == 20 ? 'selected' : '' ?>>20</option>
-            <option value="50" <?= $limit == 50 ? 'selected' : '' ?>>50</option>
-            <option value="100" <?= $limit == 100 ? 'selected' : '' ?>>100</option>
-            <option value="250" <?= $limit == 250 ? 'selected' : '' ?>>250</option>
-            <option value="1000" <?= $limit == 1000 ? 'selected' : '' ?>>1000</option>
-        </select>
+        <svg xmlns="http://www.w3.org/2000/svg" style="margin-right:10px;" width="20" height="20" fill="currentColor" class="bi bi-person-fill-add" viewBox="0 0 16 16">
+        <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0m-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+        <path d="M2 13c0 1 1 1 1 1h5.256A4.5 4.5 0 0 1 8 12.5a4.5 4.5 0 0 1 1.544-3.393Q8.844 9.002 8 9c-5 0-6 3-6 4"/>
+        </svg>
+        Add New Record
+        </button>
+        <!-- Pagination Limit -->
+        <div>
+                <label for="limit">Show:</label>
+                <select id="limit" onchange="changeLimit()" class="form-select w-auto d-inline-block mt-3">
+                    <option value="10" <?= $limit == 10 ? 'selected' : '' ?>>10</option>
+                    <option value="20" <?= $limit == 20 ? 'selected' : '' ?>>20</option>
+                    <option value="50" <?= $limit == 50 ? 'selected' : '' ?>>50</option>
+                    <option value="100" <?= $limit == 100 ? 'selected' : '' ?>>100</option>
+                    <option value="250" <?= $limit == 250 ? 'selected' : '' ?>>250</option>
+                    <option value="1000" <?= $limit == 1000 ? 'selected' : '' ?>>1000</option>
+                </select>
+                </div>
         </div>
-</div>
-        <!-- Add Record Form -->
-        <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="addModalLabel">Add New Record</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form action="process.php" method="POST" enctype="multipart/form-data">
-                    <input type="text" name="name" class="form-control mb-2" placeholder="Name" required>
-                    <input type="date" name="departure_date" class="form-control mb-2" required>
-                    <textarea name="description" class="form-control mb-2" placeholder="Description" required></textarea>
-                    <input type="file" name="profile_picture" class="form-control mb-2" accept="image/*" required>
-                    <button type="submit" name="add" class="btn btn-success">Add Record</button>
-                </form>
+                <!-- Add Record Form -->
+                <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addModalLabel">Add New Record</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="process.php" method="POST" enctype="multipart/form-data">
+                            <input type="text" name="name" class="form-control mb-2" placeholder="Name" required>
+                            <input type="date" name="departure_date" class="form-control mb-2" required>
+                            <textarea name="description" class="form-control mb-2" placeholder="Description" required></textarea>
+                            <span class="text-red" style="color:red; font-size:13px;"> Required for good design (587 width × 440 height px) </span>
+                            <input type="file" name="profile_picture" class="form-control mb-2" accept="image/*" required>
+                            <button type="submit" name="add" class="btn btn-success">Add Record</button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
-       
+            
 
         <!-- Records Table -->
         <table class="table table-bordered mt-3">
@@ -130,10 +131,10 @@ Add New Record
                         <td><?= date('F j, Y', strtotime($row['date_posted'])); ?></td>
                                     <td><img src="data:image/png;base64,<?= htmlspecialchars($row['profile_picture']); ?>" width="150"></td>
                         <td>
-                            <button class="btn btn-primary" onclick="openEditModal(<?= htmlspecialchars(json_encode($row)); ?>)">Edit</button>
+                            <button class="btn btn-primary" onclick="openEditModal(<?= htmlspecialchars(json_encode($row)); ?>)"> <i class="bi bi-pencil-square"></i>Update</button>
                             <form action="process.php" method="POST" class="d-inline" onsubmit="return confirmDelete()">
                                 <input type="hidden" name="id" value="<?= htmlspecialchars($row['id']); ?>">
-                                <button type="submit" name="delete" class="btn btn-danger">Delete</button>
+                                <button type="submit" name="delete" class="btn btn-danger"><i class="bi bi-trash3" style="margin-right:7px;"></i>Delete</button>
                             </form>
                         </td>
                     </tr>

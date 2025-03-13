@@ -44,7 +44,7 @@ if (isset($_POST['edit'])) {
         $stmt->bind_param("sssssi", $name, $departure_date, $description,$link, $base64Image, $id);
     } else {
         $stmt = $conn->prepare("UPDATE recordsofmigrants SET company_name=?, departure_date=?, link=?, description=? WHERE id=?");
-        $stmt->bind_param("sssi", $name, $departure_date, $link, $description, $id);
+        $stmt->bind_param("ssssi", $name, $departure_date, $link, $description, $id);
     }
 
     if ($stmt->execute()) {
@@ -53,7 +53,7 @@ if (isset($_POST['edit'])) {
         $_SESSION['error'] = "Failed to update record.";
     }
     $stmt->close();
-    header("Location: dashboard.php");
+    header("Location: dashboard2.php");
     exit();
 }
 
