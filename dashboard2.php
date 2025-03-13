@@ -11,27 +11,27 @@ $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $offset = ($page - 1) * $limit;
 $search = isset($_GET['search']) ? trim($_GET['search']) : '';
 
-// Pagbilang ng total recordsOfMigrants (kasama ang search)
+// Pagbilang ng total recordsofmigrants (kasama ang search)
 if (!empty($search)) {
-    $stmt = $conn->prepare("SELECT COUNT(*) FROM recordsOfMigrants WHERE company_name LIKE ?");
+    $stmt = $conn->prepare("SELECT COUNT(*) FROM recordsofmigrants WHERE company_name LIKE ?");
     $search_param = "%{$search}%";
     $stmt->bind_param("s", $search_param);
 } else {
-    $stmt = $conn->prepare("SELECT COUNT(*) FROM recordsOfMigrants");
+    $stmt = $conn->prepare("SELECT COUNT(*) FROM recordsofmigrants");
 }
 $stmt->execute();
-$stmt->bind_result($total_recordsOfMigrants);
+$stmt->bind_result($total_recordsofmigrants);
 $stmt->fetch();
 $stmt->close();
 
-$total_pages = ceil($total_recordsOfMigrants / $limit);
+$total_pages = ceil($total_recordsofmigrants / $limit);
 
-// Kunin ang recordsOfMigrants gamit ang pagination at search filter
+// Kunin ang recordsofmigrants gamit ang pagination at search filter
 if (!empty($search)) {
-    $stmt = $conn->prepare("SELECT * FROM recordsOfMigrants WHERE company_name LIKE ? ORDER BY id DESC LIMIT ? OFFSET ?");
+    $stmt = $conn->prepare("SELECT * FROM recordsofmigrants WHERE company_name LIKE ? ORDER BY id DESC LIMIT ? OFFSET ?");
     $stmt->bind_param("sii", $search_param, $limit, $offset);
 } else {
-    $stmt = $conn->prepare("SELECT * FROM recordsOfMigrants ORDER BY id DESC LIMIT ? OFFSET ?");
+    $stmt = $conn->prepare("SELECT * FROM recordsofmigrants ORDER BY id DESC LIMIT ? OFFSET ?");
     $stmt->bind_param("ii", $limit, $offset);
 }
 $stmt->execute();
@@ -110,7 +110,7 @@ Add New Record
 </div>
        
 
-        <!-- RecordsOfMigrants Table -->
+        <!-- recordsofmigrants Table -->
         <table class="table table-bordered mt-3">
             <thead>
                 <tr>
