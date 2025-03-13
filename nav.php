@@ -29,6 +29,11 @@ $current_page = basename($_SERVER['PHP_SELF']);
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link <?= ($current_page == 'dashboard3.php') ? 'active text-warning' : '' ?>" href="dashboard3.php">
+                        <i class="fas fa-users"></i> Event
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link btn btn-danger text-white" href="logout.php">
                         <i class="fas fa-sign-out-alt"></i> Logout
                     </a>
@@ -54,6 +59,11 @@ $current_page = basename($_SERVER['PHP_SELF']);
             <li class="nav-item">
                 <a class="nav-link  <?= ($current_page == 'dashboard2.php') ? 'active text-warning' : 'text-white' ?> " href="dashboard2.php">
                     <i class="fas fa-folder"></i> Employers
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link  <?= ($current_page == 'dashboard3.php') ? 'active text-warning' : 'text-white' ?> " href="dashboard2.php">
+                    <i class="fas fa-folder"></i> Events
                 </a>
             </li>
             <li class="nav-item">

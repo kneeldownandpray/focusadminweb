@@ -5,7 +5,7 @@ include 'db.php';
 // ADD RECORD
 if (isset($_POST['add'])) {
     $name = $_POST['name'];
-    $departure_date = date('F j, Y', strtotime($_POST['departure_date'])); // Format: March 14, 2025
+    $started_date = date('F j, Y', strtotime($_POST['started_date'])); // Format: March 14, 2025
     $description = $_POST['description'];
     $date_posted = date('Y-m-d H:i:s');
 
@@ -14,8 +14,8 @@ if (isset($_POST['add'])) {
         $imageData = file_get_contents($_FILES['profile_picture']['tmp_name']);
         $base64Image = base64_encode($imageData);
 
-        $stmt = $conn->prepare("INSERT INTO records (name, departure_date, description, date_posted, profile_picture) VALUES (?, ?, ?, ?, ?)");
-        $stmt->bind_param("sssss", $name, $departure_date, $description, $date_posted, $base64Image);
+        $stmt = $conn->prepare("INSERT INTO records (name, started_date, description, date_posted, profile_picture) VALUES (?, ?, ?, ?, ?)");
+        $stmt->bind_param("sssss", $name, $started_date, $description, $date_posted, $base64Image);
         
         if ($stmt->execute()) {
             $_SESSION['message'] = "Record added successfully!";
@@ -32,18 +32,18 @@ if (isset($_POST['add'])) {
 if (isset($_POST['edit'])) {
     $id = $_POST['id'];
     $name = $_POST['name'];
-    $departure_date = date('F j, Y', strtotime($_POST['departure_date'])); // Tamang format
+    $started_date = date('F j, Y', strtotime($_POST['started_date'])); // Tamang format
     $description = $_POST['description'];
 
     if ($_FILES['profile_picture']['error'] == 0) {
         $imageData = file_get_contents($_FILES['profile_picture']['tmp_name']);
         $base64Image = base64_encode($imageData);
 
-        $stmt = $conn->prepare("UPDATE records SET name=?, departure_date=?, description=?, profile_picture=? WHERE id=?");
-        $stmt->bind_param("ssssi", $name, $departure_date, $description, $base64Image, $id);
+        $stmt = $conn->prepare("UPDATE records SET name=?, started_date=?, description=?, profile_picture=? WHERE id=?");
+        $stmt->bind_param("ssssi", $name, $started_date, $description, $base64Image, $id);
     } else {
-        $stmt = $conn->prepare("UPDATE records SET name=?, departure_date=?, description=? WHERE id=?");
-        $stmt->bind_param("sssi", $name, $departure_date, $description, $id);
+        $stmt = $conn->prepare("UPDATE records SET name=?, started_date=?, description=? WHERE id=?");
+        $stmt->bind_param("sssi", $name, $started_date, $description, $id);
     }
 
     if ($stmt->execute()) {

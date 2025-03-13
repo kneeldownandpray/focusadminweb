@@ -56,7 +56,7 @@ $result = $stmt->get_result();
 <body>
 <?php include 'nav.php'; ?>
     <div class="container mt-4">
-        <!-- Search Form --> <h2><b>Top Employers</b></h2>
+        <!-- Search Form --> <h2><b>Event of Focus</b></h2>
         <form method="GET" action="" class="mt-3" style="display:flex;">
             <input type="text" name="search" class="form-control" placeholder="Search by Name..." value="<?= htmlspecialchars($search) ?>">
             <button type="submit" class="btn btn-success " style="margin-left:5px;">Search</button>
@@ -115,12 +115,12 @@ Add New Record
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Name</th>
-                    <th>Date of partnership</th>
+                    <th>Title</th>
+                    <th>Date of Event</th>
                     <th>Description</th>
                     <th>Date Posted</th>
-                    <th>Company Link</th>
-                    <th>Profile Picture</th>
+                    <th>Link</th>
+                    <th>Event Picture</th>
                     <th>Actions</th>
                 </tr>
             </thead>

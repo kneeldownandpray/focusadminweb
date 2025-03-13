@@ -24,7 +24,7 @@ if (isset($_POST['add'])) {
         }
         $stmt->close();
     }
-    header("Location: dashboard2.php");
+    header("Location: dashboard3.php");
     exit();
 }
 
@@ -53,7 +53,7 @@ if (isset($_POST['edit'])) {
         $_SESSION['error'] = "Failed to update record.";
     }
     $stmt->close();
-    header("Location: dashboard2.php");
+    header("Location: dashboard3.php");
     exit();
 }
 
@@ -70,7 +70,7 @@ if (isset($_POST['delete'])) {
         $_SESSION['error'] = "Failed to delete record.";
     }
     $stmt->close();
-    header("Location: dashboard2.php");
+    header("Location: dashboard3.php");
     exit();
 }
 ?>
