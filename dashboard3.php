@@ -100,7 +100,7 @@ Add New Record
                     <input type="date" name="started_date" class="form-control mb-2" required>
                     <textarea name="description" class="form-control mb-2" placeholder="Description" required></textarea>
                     <textarea name="link" class="form-control mb-2" placeholder="Link Of Company(Optional)" ></textarea>
-                    <span class="text-red" style="color:red; font-size:13px;"> Required for good design (587 width × 440 height px) </span>
+                    <span class="text-red" style="color:red; font-size:13px;"> Required for good design (850 width × 460 height px) </span>
                     <input type="file" name="event_picture" class="form-control mb-2" accept="image/*" required>
                     <button type="submit" name="add" class="btn btn-success">Add Record</button>
                 </form>

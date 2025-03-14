@@ -62,7 +62,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link  <?= ($current_page == 'dashboard3.php') ? 'active text-warning' : 'text-white' ?> " href="dashboard2.php">
+                <a class="nav-link  <?= ($current_page == 'dashboard3.php') ? 'active text-warning' : 'text-white' ?> " href="dashboard3.php">
                     <i class="fas fa-folder"></i> Events
                 </a>
             </li>
