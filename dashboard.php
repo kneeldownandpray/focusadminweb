@@ -96,7 +96,7 @@ $result = $stmt->get_result();
                     <div class="modal-body">
                         <form action="process.php" method="POST" enctype="multipart/form-data">
                             <input type="text" name="name" class="form-control mb-2" placeholder="Name" required>
-                            <input type="date" name="started_date" class="form-control mb-2" required>
+                            <input type="date" name="departure_date" class="form-control mb-2" required>
                             <textarea name="description" class="form-control mb-2" placeholder="Description" required></textarea>
                             <span class="text-red" style="color:red; font-size:13px;"> Required for good design (587 width × 440 height px) </span>
                             <input type="file" name="profile_picture" class="form-control mb-2" accept="image/*" required>
@@ -126,7 +126,7 @@ $result = $stmt->get_result();
                     <tr>
                         <td><?= htmlspecialchars($row['id']); ?></td>
                         <td><?= htmlspecialchars($row['name']); ?></td>
-                        <td><?= date('F j, Y', strtotime($row['started_date'])); ?></td>
+                        <td><?= date('F j, Y', strtotime($row['departure_date'])); ?></td>
                         <td><?= htmlspecialchars($row['description']); ?></td>
                         <td><?= date('F j, Y', strtotime($row['date_posted'])); ?></td>
                                     <td><img src="data:image/png;base64,<?= htmlspecialchars($row['profile_picture']); ?>" width="150"></td>
@@ -155,7 +155,7 @@ $result = $stmt->get_result();
                     <form action="process.php" method="POST" enctype="multipart/form-data">
                         <input type="hidden" name="id" id="edit-id">
                         <input type="text" name="name" id="edit-name" class="form-control mb-2" required>
-                        <input type="date" name="started_date" id="edit-departure" class="form-control mb-2" required>
+                        <input type="date" name="departure_date" id="edit-departure" class="form-control mb-2" required>
                         <textarea name="description" id="edit-description" class="form-control mb-2" required></textarea>
                         <input type="file" name="profile_picture" class="form-control mb-2" accept="image/*">
                         <button type="submit" name="edit" class="btn btn-success">Update</button>
@@ -202,7 +202,7 @@ $result = $stmt->get_result();
     function openEditModal(record) {
         document.getElementById("edit-id").value = record.id;
         document.getElementById("edit-name").value = record.name;
-        document.getElementById("edit-departure").value = record.started_date;
+        document.getElementById("edit-departure").value = record.departure_date;
         document.getElementById("edit-description").value = record.description;
 
         var editModal = new bootstrap.Modal(document.getElementById("editModal"));
