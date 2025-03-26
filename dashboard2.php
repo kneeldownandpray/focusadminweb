@@ -6,32 +6,32 @@ if (!isset($_SESSION['admin_logged_in'])) {
 }
 include 'db.php';
 
-$limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 10;
+$limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 20;
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $offset = ($page - 1) * $limit;
 $search = isset($_GET['search']) ? trim($_GET['search']) : '';
 
-// Pagbilang ng total recordofevent (kasama ang search)
+// Pagbilang ng total recordsOfMigrants (kasama ang search)
 if (!empty($search)) {
-    $stmt = $conn->prepare("SELECT COUNT(*) FROM recordofevent WHERE title_name LIKE ?");
+    $stmt = $conn->prepare("SELECT COUNT(*) FROM recordsofmigrants WHERE name LIKE ?");
     $search_param = "%{$search}%";
     $stmt->bind_param("s", $search_param);
 } else {
-    $stmt = $conn->prepare("SELECT COUNT(*) FROM recordofevent");
+    $stmt = $conn->prepare("SELECT COUNT(*) FROM recordsofmigrants");
 }
 $stmt->execute();
-$stmt->bind_result($total_recordofevent);
+$stmt->bind_result($total_recordsofmigrants);
 $stmt->fetch();
 $stmt->close();
 
-$total_pages = ceil($total_recordofevent / $limit);
+$total_pages = ceil($total_recordsofmigrants / $limit);
 
-// Kunin ang recordofevent gamit ang pagination at search filter
+// Kunin ang recordsOfMigrants gamit ang pagination at search filter
 if (!empty($search)) {
-    $stmt = $conn->prepare("SELECT * FROM recordofevent WHERE title_name LIKE ? ORDER BY id DESC LIMIT ? OFFSET ?");
+    $stmt = $conn->prepare("SELECT * FROM recordsofmigrants WHERE company_name LIKE ? ORDER BY id DESC LIMIT ? OFFSET ?");
     $stmt->bind_param("sii", $search_param, $limit, $offset);
 } else {
-    $stmt = $conn->prepare("SELECT * FROM recordofevent ORDER BY id DESC LIMIT ? OFFSET ?");
+    $stmt = $conn->prepare("SELECT * FROM recordsofmigrants ORDER BY id DESC LIMIT ? OFFSET ?");
     $stmt->bind_param("ii", $limit, $offset);
 }
 $stmt->execute();
@@ -45,8 +45,6 @@ $result = $stmt->get_result();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
-
     <script>
         function confirmDelete() {
             return confirm("Are you sure you want to delete this record?");
@@ -95,13 +93,12 @@ Add New Record
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="process3.php" method="POST" enctype="multipart/form-data">
-                    <input type="text" name="title_name" class="form-control mb-2" placeholder="Name" required>
-                    <input type="date" name="started_date" class="form-control mb-2" required>
+                <form action="process2.php" method="POST" enctype="multipart/form-data">
+                    <input type="text" name="company_name" class="form-control mb-2" placeholder="Name" required>
+                    <input type="date" name="departure_date" class="form-control mb-2" required>
                     <textarea name="description" class="form-control mb-2" placeholder="Description" required></textarea>
                     <textarea name="link" class="form-control mb-2" placeholder="Link Of Company(Optional)" ></textarea>
-                    <span class="text-red" style="color:red; font-size:13px;"> Required for good design (587 width × 440 height px) </span>
-                    <input type="file" name="event_picture" class="form-control mb-2" accept="image/*" required>
+                    <input type="file" name="company_picture" class="form-control mb-2" accept="image/*" required>
                     <button type="submit" name="add" class="btn btn-success">Add Record</button>
                 </form>
             </div>
@@ -110,7 +107,7 @@ Add New Record
 </div>
        
 
-        <!-- recordofevent Table -->
+        <!-- RecordsOfMigrants Table -->
         <table class="table table-bordered mt-3">
             <thead>
                 <tr>
@@ -128,17 +125,17 @@ Add New Record
                 <?php while ($row = $result->fetch_assoc()): ?>
                     <tr>
                         <td><?= htmlspecialchars($row['id']); ?></td>
-                        <td><?= htmlspecialchars($row['title_name']); ?></td>
-                        <td><?= date('F j, Y', strtotime($row['started_date'])); ?></td>
+                        <td><?= htmlspecialchars($row['company_name']); ?></td>
+                        <td><?= date('F j, Y', strtotime($row['departure_date'])); ?></td>
                         <td><?= htmlspecialchars($row['description']); ?></td>
                         <td><?= date('F j, Y', strtotime($row['date_posted'])); ?></td>
                         <td><?= htmlspecialchars($row['link']); ?></td>
-                                    <td><img src="data:image/png;base64,<?= htmlspecialchars($row['event_picture']); ?>" width="150"></td>
-                        <td >  
-                            <button class="btn btn-primary" onclick="openEditModal(<?= htmlspecialchars(json_encode($row)); ?>)"> <i class="bi bi-pencil-square"></i> Update</button>
-                            <form action="process3.php" method="POST" class="d-inline" onsubmit="return confirmDelete()">
+                                    <td><img src="data:image/png;base64,<?= htmlspecialchars($row['company_picture']); ?>" width="150"></td>
+                        <td>  
+                            <button class="btn btn-primary" onclick="openEditModal(<?= htmlspecialchars(json_encode($row)); ?>)">Edit</button>
+                            <form action="process2.php" method="POST" class="d-inline" onsubmit="return confirmDelete()">
                                 <input type="hidden" name="id" value="<?= htmlspecialchars($row['id']); ?>">
-                                <button type="submit" name="delete" class="btn btn-danger"><i class="bi bi-trash3" style="margin-right:9px;"></i>Delete</button>
+                                <button type="submit" name="delete" class="btn btn-danger">Delete</button>
                             </form>
                         </td>
                     </tr>
@@ -156,13 +153,13 @@ Add New Record
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="process3.php" method="POST" enctype="multipart/form-data">
+                    <form action="process2.php" method="POST" enctype="multipart/form-data">
                         <input type="hidden" name="id" id="edit-id">
-                        <input type="text" name="title_name" id="edit-name" class="form-control mb-2" required>
-                        <input type="date" name="started_date" id="edit-departure" class="form-control mb-2" required>
+                        <input type="text" name="company_name" id="edit-name" class="form-control mb-2" required>
+                        <input type="date" name="departure_date" id="edit-departure" class="form-control mb-2" required>
                         <textarea name="description" id="edit-description" class="form-control mb-2" required></textarea>
                         <input type="text" name="link" id="edit-link" class="form-control mb-2" required>
-                        <input type="file" name="event_picture" class="form-control mb-2" accept="image/*">
+                        <input type="file" name="company_picture" class="form-control mb-2" accept="image/*">
                         <button type="submit" name="edit" class="btn btn-success">Update</button>
                     </form>
                 </div>
@@ -206,9 +203,9 @@ Add New Record
 
     function openEditModal(record) {
         document.getElementById("edit-id").value = record.id;
-        document.getElementById("edit-name").value = record.title_name;
+        document.getElementById("edit-name").value = record.company_name;
         document.getElementById("edit-link").value = record.link;
-        document.getElementById("edit-departure").value = record.started_date;
+        document.getElementById("edit-departure").value = record.departure_date;
         document.getElementById("edit-description").value = record.description;
 
         var editModal = new bootstrap.Modal(document.getElementById("editModal"));
